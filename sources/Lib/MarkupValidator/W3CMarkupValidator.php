@@ -45,8 +45,17 @@ class W3CMarkupValidator extends Component implements MarkupValidatorInterface
     {
         parent::__construct($configuration);
 
-        $this->initializeHttpClient();
         $this->initializeHttpRequestParameters();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setConfiguration(array $configuration)
+    {
+        parent::setConfiguration($configuration);
+
+        $this->initializeHttpClient();
     }
 
     /**
