@@ -23,6 +23,25 @@ The recommended way of module installation is via [composer](https://getcomposer
 composer require --dev kolyunya/codeception-markup-validator
 ```
 
+## Usage with local validation service
+You can use [nu html checker](validator.github.io/validator/) to validate your markup locally.
+```sh
+docker run -it --rm -p 8888:8888 ghcr.io/validator/validator:latest
+```
+
+And ajust your provider config
+```yaml
+class_name: AcceptanceTester
+modules:
+    enabled:
+        - Kolyunya\Codeception\Module\MarkupValidator:
+            validator:
+                class: Kolyunya\Codeception\Lib\MarkupValidator\W3CMarkupValidator
+                config:
+                    baseUri: 'http://127.0.0.1:8888/'
+                    endpoint: '/'
+```
+
 ## Usage
 Add the module to your acceptance test suit configuration:
 ```yaml
